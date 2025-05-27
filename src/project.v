@@ -21,6 +21,9 @@ module tt_um_example (
   assign uio_out = 0;
   assign uio_oe  = 0;
 
+  assign uo_out[2]=0;
+  assign uo_out[3]=0;
+
   // List all unused inputs to prevent warnings
   wire _unused = &{ena};
 

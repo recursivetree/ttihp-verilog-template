@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 /*
 A priority arbiter implementation

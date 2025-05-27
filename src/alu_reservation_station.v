@@ -1,5 +1,3 @@
-`timescale 1ns/1ps
-
 /*
 The alu reservation station listens to the CDB bus for operands. Once it has all operands, it issues a CDB write request
 wit the ALU operation result.

@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 
 /*
 A CDB listener implementation
