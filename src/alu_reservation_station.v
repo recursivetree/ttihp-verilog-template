@@ -1,3 +1,5 @@
+
+
 /*
 The alu reservation station listens to the CDB bus for operands. Once it has all operands, it issues a CDB write request
 wit the ALU operation result.
@@ -52,7 +54,7 @@ module alu_reservation_station
         .data(operand_a),
         .command_update_en(command_update_en),
         .command_data(command_a_data),
-        .command_data_is_valid(command_b_data_is_valid)
+        .command_data_is_valid(command_a_data_is_valid)
     );
     cdb_result_listener #(.DATA_WIDTH(DATA_WIDTH), .CDB_TAG_WIDTH(CDB_TAG_WIDTH)) operand_b_cdb_listener(
         .clk(clk), 

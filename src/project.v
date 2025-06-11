@@ -22,9 +22,15 @@ module tt_um_example (
 
   wire _unused = &{ena, clk, rst_n, uio_in, 1'b0};
 
-  onehot_to_binary #(.INPUTS(8),.WIDTH(8), .OFFSET(54)) otb(
-    ui_in,
-    uo_out
-  );
+  top top(
+      .clk(clk),
+      .rst_n(rst_n),
+      .command_kind(uio_in[2:0]),
+      .command_operand1(ui_in(3:0)),
+      .command_operand2(ui_in(7:0))
+    );
+
+  assign uo_out[7:4] = 0 
+  assign uo_out[3:0] = top.cdb_data;
 
 endmodule
