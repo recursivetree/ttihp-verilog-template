@@ -32,6 +32,12 @@ module register_file_controller #(
     localparam EFFECTIVE_REGISTER_WIDTH = (DATA_WIDTH > CDB_TAG_WIDTH) ? DATA_WIDTH : CDB_TAG_WIDTH;
     localparam COMMAND_OP2_SIZE = (DATA_WIDTH > $clog2(REGISTER_COUNT)) ? DATA_WIDTH : $clog2(REGISTER_COUNT);
 
+    localparam UOP_COMMAND_KIND_NOP  = 3'b000;
+    localparam UOP_COMMAND_KIND_ALU  = 3'b001;
+    localparam UOP_COMMAND_KIND_IMM  = 3'b010;
+    localparam UOP_COMMAND_KIND_COPY = 3'b011;
+    localparam UOP_COMMAND_KIND_OUT  = 3'b100;
+
     // RF write interface
     reg rf_write_en;
     reg[$clog2(REGISTER_COUNT)-1:0] rf_write_reg_addr;
@@ -51,7 +57,7 @@ module register_file_controller #(
 
     always @(*) begin
         case (command_kind)
-            frontend.UOP_COMMAND_KIND_ALU: begin
+            UOP_COMMAND_KIND_ALU: begin
                 // RF write
                 rf_write_en = alu_eu_command_update_accepted;   // alu operations produce a result, but only update the RF once eu accepts
                 rf_write_reg_addr = 0;                          // alu result goes to ACC
@@ -69,7 +75,7 @@ module register_file_controller #(
                 // stall output
                 rf_controller_stall = alu_eu_command_update_accepted;
             end
-            frontend.UOP_COMMAND_KIND_IMM: begin
+            UOP_COMMAND_KIND_IMM: begin
                 // RF write
                 rf_write_en = 1;                    // load immediates can always execute in one cycle  
                 rf_write_reg_addr = 0;              // load immediate data goes to the accumulator                          
@@ -87,7 +93,7 @@ module register_file_controller #(
                 // stall output
                 rf_controller_stall = 0;    // load immediate can always execute in one cycle  
             end
-            frontend.UOP_COMMAND_KIND_COPY: begin
+            UOP_COMMAND_KIND_COPY: begin
                 // RF write
                 rf_write_en = 1;                            // copy can always execute in one cycle  
                 rf_write_reg_addr = command_operand2;       // operand2 is the destination of the copy
