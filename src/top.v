@@ -3,7 +3,7 @@ module top
 #(
      parameter DATA_WIDTH = 4,      // the bitwidth of a data word
      parameter CDB_TAG_WIDTH = 4,    // the bitwidth of a CDB tag. Ensure CDB_TAG_WIDTH<=DATA_WIDTH
-     parameter REGISTER_COUNT = 4
+     parameter REGISTER_COUNT = 8
 )(
     input clk,
     input rst_n,
