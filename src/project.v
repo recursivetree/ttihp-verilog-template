@@ -30,7 +30,7 @@ module tt_um_example (
       .command_operand2(ui_in[7:0])
     );
 
-  assign uo_out[7:4] = 0 
+  assign uo_out[7:4] = 0;
   assign uo_out[3:0] = top.cdb_data;
 
 endmodule
