@@ -26,8 +26,8 @@ module tt_um_example (
       .clk(clk),
       .rst_n(rst_n),
       .command_kind(uio_in[2:0]),
-      .command_operand1(ui_in(3:0)),
-      .command_operand2(ui_in(7:0))
+      .command_operand1(ui_in[3:0]),
+      .command_operand2(ui_in[7:0])
     );
 
   assign uo_out[7:4] = 0 
