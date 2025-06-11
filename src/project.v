@@ -27,10 +27,10 @@ module tt_um_example (
       .rst_n(rst_n),
       .command_kind(uio_in[2:0]),
       .command_operand1(ui_in[3:0]),
-      .command_operand2(ui_in[7:0])
+      .command_operand2(ui_in[7:0]),
+      .optimization_stopper(uo_out[3:0])
     );
 
   assign uo_out[7:4] = 0;
-  assign uo_out[3:0] = top.cdb_data;
 
 endmodule

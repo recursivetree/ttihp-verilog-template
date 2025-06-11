@@ -11,7 +11,9 @@ module top
     // temporary for testing
     input[2:0] command_kind,
     input[$clog2(REGISTER_COUNT)-1:0] command_operand1,
-    input[3:0] command_operand2
+    input[3:0] command_operand2,
+
+    output[3:0] optimization_stopper
 );
     localparam CDB_OUT_PARTICIPANTS = 1;
     localparam CDB_OUT_ALU_PRIO = 0;
@@ -21,6 +23,8 @@ module top
     wire[DATA_WIDTH-1:0] cdb_data;
     wire[CDB_OUT_PARTICIPANTS-1:0] cdb_out_requests;
     wire[CDB_OUT_PARTICIPANTS-1:0] cdb_out_request_granted;
+
+    assign optimization_stopper = cdb_data;
 
     wire[CDB_TAG_WIDTH-1:0] alu_cdb_out_tag;
     wire[DATA_WIDTH-1:0] alu_cdb_out_data;
